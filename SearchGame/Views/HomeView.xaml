@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="SearchGame.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SearchGame.Views"
+             xmlns:viewModel="clr-namespace:SearchGame.ViewModel"
+             xmlns:views="clr-namespace:SearchGame.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- 데스크탑 아이콘 리스트 템플렛 -->
+        <DataTemplate x:Key="DesktopIconListTemplate">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <Button Command="{Binding DataContext.OpenIcon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}"
+                        Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <Image Source="{Binding ImageSource}" Width="50" Height="50"/>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <TextBlock Text="{Binding ImageName}" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- 퀘스트 리스트 템플렛-->
+        <DataTemplate x:Key="QuestListTemplate">
+            <StackPanel>
+                <Button Content="{Binding QuestName}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" FontSize="20"
+                        Command="{Binding DataContext.LoadQuestView, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </DataTemplate>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <!-- View Template 구현 -->
+        <!--
+        <DataTemplate DataType="{x:Type viewModel:QuestViewModel}">
+            <views:QuestView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:WallPaperViewModel}">
+            <views:WallPaperView/>
+        </DataTemplate>
+        -->
+    </UserControl.Resources>
+
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="85*"/>
+            <ColumnDefinition Width="474*"/>
+            <ColumnDefinition Width="242*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="C:/Users/tuuna/Desktop/Search/Image/wallpaper.png" Grid.Column="1" Grid.Row="0" Stretch="Fill"/>
+
+        <!--데스크톱 아이콘 리스트-->
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Background="AntiqueWhite">
+            <ListBox ItemTemplate="{StaticResource DesktopIconListTemplate}"
+                     SelectedItem="{Binding SelectedIcon}"
+                     ItemsSource="{Binding DesktopIconLists}">
+
+            </ListBox>
+        </StackPanel>
+        <!--종료 버튼-->
+        <Button Grid.Column="0" Grid.Row="1" Content="Option" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Width="85"
+                Command="{Binding ExitGame}"/>
+        <!--작업줄 표시줄-->
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Background="BurlyWood">
+
+        </StackPanel>
+
+        <!--퀘스트 목록-->
+        <DockPanel Grid.Column="2" Grid.RowSpan="2" Background="AliceBlue" >
+            <Button DockPanel.Dock="Top" Content="Quest" Height="55" Background="MediumPurple" 
+                    Command="{Binding LoadQuestList}"/>
+            <ListBox DockPanel.Dock="Top" ItemTemplate="{StaticResource QuestListTemplate}"
+                     ItemsSource="{Binding QuestLists}"
+                     SelectedItem="{Binding SelectedQuest}"
+                     >
+
+            </ListBox>
+        </DockPanel>
+
+        <!--퀘스트 창-->
+        <Grid Grid.Column="1" Grid.Row="0" Visibility="{Binding QuestViewOpen, Converter={StaticResource BoolToVis}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="109*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="0" Grid.Row="0" Background="#903091" Margin="0,0,0,0">
+                <Button  Width="35" Height="35" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center"
+                     Command="{Binding CloseQuestView}">
+                    <Image Source="C:/Users/tuuna/Desktop/Search/Image/close.png"/>
+                </Button>
+            </StackPanel>
+            
+            <Border Grid.Column="0" Grid.Row="1" Background="White">
+                <StackPanel>
+                    <TextBlock Text="{Binding QuestTitle, Mode=TwoWay}"/>
+                    <TextBlock Text="{Binding QuestContent, Mode=TwoWay}"/>
+                </StackPanel>
+            </Border>
+            <DockPanel Grid.Column="1" Grid.Row="2" Background="LightGray">
+                <TextBox Text="{Binding QuestAnswer, UpdateSourceTrigger=PropertyChanged}" Width="382" Margin="0,0,0,0" Background="LightGray"/>
+                <Button Content="확인" FontSize="20" FontWeight="Bold" Foreground="Azure"  Background="Orange" BorderBrush="Transparent"/>
+            </DockPanel>
+        </Grid>
+        <!--
+        <Grid Grid.Column="1" Grid.Row="0">
+            <ContentControl Content="{Binding ContentView}"/>
+        </Grid> -->
+    </Grid>
+</UserControl>
