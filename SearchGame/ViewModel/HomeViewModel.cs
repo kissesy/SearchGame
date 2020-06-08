@@ -34,6 +34,41 @@ namespace SearchGame.ViewModel
             //LoadQuestListExecute();
         }
 
+        #region OpenIcon
+
+        private DesktopIconList _SelectedIcon;
+        public DesktopIconList SelectedIcon
+        {
+            get { return _SelectedIcon; }
+            set { _SelectedIcon = value; RaisePropertyChanged("SelectedIcon"); }
+        }
+
+        void OpenIconExecute()
+        {
+            //어떤 아이콘을 눌렀는지에 대한 정보 필요 
+            if(SelectedIcon.Type == 1)
+            {
+                //InterNetBrowser
+                ContentView = new ViewModel.InternetViewModel();
+            }
+            else if(SelectedIcon.Type == 2)
+            {
+
+            }
+            else if(SelectedIcon.Type == 3)
+            {
+
+            }
+            
+        }
+        bool CanOpenIconExecute()
+        {
+            return SelectedIcon != null;
+        }
+
+        public ICommand OpenIcon { get { return new RelayCommand(OpenIconExecute, CanOpenIconExecute); } }
+        #endregion
+
         #region LoadQuestView
 
         private QuestDetail _Quest = new QuestDetail();
@@ -126,9 +161,9 @@ namespace SearchGame.ViewModel
             //C:/Users/tuuna/Desktop/Search/Image
             ObservableCollection<DesktopIconList> deskiconlist = new ObservableCollection<DesktopIconList>
             {
-                new DesktopIconList { ImageName = "Internet", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/internet.png" },
-                new DesktopIconList { ImageName = "market", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/market.png" },
-                new DesktopIconList { ImageName = "notepad", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/notepad.png" }
+                new DesktopIconList { ImageName = "Internet", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/internet.png", Type=1 },
+                new DesktopIconList { ImageName = "market", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/market.png", Type=2 },
+                new DesktopIconList { ImageName = "notepad", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/notepad.png", Type=3 }
             };
             DesktopIconLists = deskiconlist;
         }

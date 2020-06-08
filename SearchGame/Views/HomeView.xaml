@@ -43,16 +43,13 @@
         </DataTemplate>
 
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        
         <!-- View Template 구현 -->
-        <!--
-        <DataTemplate DataType="{x:Type viewModel:QuestViewModel}">
-            <views:QuestView/>
-        </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewModel:WallPaperViewModel}">
-            <views:WallPaperView/>
+        <DataTemplate DataType="{x:Type viewModel:InternetViewModel}">
+            <views:InternetView/>
         </DataTemplate>
-        -->
+        
     </UserControl.Resources>
 
     <Grid Background="LightGray">
@@ -122,9 +119,9 @@
                 <Button Content="확인" FontSize="20" FontWeight="Bold" Foreground="Azure"  Background="Orange" BorderBrush="Transparent"/>
             </DockPanel>
         </Grid>
-        <!--
-        <Grid Grid.Column="1" Grid.Row="0">
+
+        <Grid Grid.ColumnSpan="3" Grid.RowSpan="3">
             <ContentControl Content="{Binding ContentView}"/>
-        </Grid> -->
+        </Grid>
     </Grid>
 </UserControl>

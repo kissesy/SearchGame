@@ -10,6 +10,6 @@
     <Grid>
         <!--
         <views:HomeView x:Name="HomeViewControl"/> -->
-        <views:InternetView/>
+        <views:HomeView/>
     </Grid>
 </Window>

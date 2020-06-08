@@ -7,15 +7,32 @@ using SearchGame.Model;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using SearchGame.ViewModel;
+using System.Messaging;
+using System.Windows;
+
+
 
 namespace SearchGame.ViewModel
 {
-    public class InternetViewModel : INotify
+    public class InternetViewModel : INotify, IMessageBoxService
     {
         public InternetViewModel()
         {
+            //ContentView = new ViewModel.InternetViewModel();
             OnBrowser = true;
             OnNews = false;
+        }
+
+        private Object contentview;
+        public Object ContentView
+        {
+            get { return contentview; }
+            set
+            {
+                contentview = value;
+                RaisePropertyChanged("ContentView");
+            }
         }
 
         #region ON/OFF 
@@ -40,6 +57,34 @@ namespace SearchGame.ViewModel
                 RaisePropertyChanged("OnNews");
             }
         }
+
+        private bool _OnBlog;
+        public bool OnBlog
+        {
+            get { return _OnBlog; }
+            set
+            {
+                _OnBlog = value;
+                RaisePropertyChanged("OnBlog");
+            }
+        }
+        #endregion
+
+        #region CloseInternetView
+
+        void CloseInternetExecute()
+        {
+            //ShowMessage("asd", "asd", MessageType.Acknowledgment);
+            //ViewModel 할당은됨 
+            ContentView = new HomeViewModel();
+        }
+
+        bool CanCloseInternetExecute()
+        {
+            return true;
+        }
+
+        public ICommand CloseInternet { get { return new RelayCommand(CloseInternetExecute, CanCloseInternetExecute); } }
         #endregion
 
         #region Search
@@ -135,6 +180,11 @@ namespace SearchGame.ViewModel
 
         #endregion
 
+
+        #region BlogTemplate
+
+        #endregion
+
         #region UrlList
 
         private ObservableCollection<UrlList> Urls = new ObservableCollection<UrlList>();
@@ -174,6 +224,20 @@ namespace SearchGame.ViewModel
             UrlLists = _Urls;
         }
 
+        #endregion
+
+        #region MessageBox
+        //MessageBox Interface 
+        bool ShowMessage(string text, string caption, MessageType messageType)
+        {
+            MessageBox.Show(text, caption, MessageBoxButton.OK, MessageBoxImage.Information);
+            return true;
+        }
+
+        bool IMessageBoxService.ShowMessage(string text, string caption, MessageType messageType)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

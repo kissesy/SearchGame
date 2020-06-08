@@ -33,6 +33,8 @@ namespace SearchGame.Model
             }
         }
 
+        public int Type;
+
     }
 
     public class QuestList : INotify

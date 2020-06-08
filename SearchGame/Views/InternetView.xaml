@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SearchGame.Views"
+             xmlns:views="clr-namespace:SearchGame.Views"
+             xmlns:viewModel="clr-namespace:SearchGame.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -23,8 +25,11 @@
         </DataTemplate>
 
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-    </UserControl.Resources>
 
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <views:HomeView/>
+        </DataTemplate>
+    </UserControl.Resources>
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -32,10 +37,11 @@
             <RowDefinition Height="39*"/>
             <RowDefinition Height="175*"/>
         </Grid.RowDefinitions>
-
+        
+        
         <StackPanel Grid.Column="0" Grid.Row="0" Background="#903091" Margin="0,0,0,0.4">
             <Button Width="20" Height="20" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center"
-                     Command="{Binding CloseInternetView}">
+                     Command="{Binding CloseInternet}">
                 <Image Source="C:/Users/tuuna/Desktop/Search/Image/close.png"/>
             </Button>
         </StackPanel>
@@ -90,7 +96,12 @@
 
         <!-- 블로그 템플릿-->
         <Grid Grid.Column="0" Grid.Row="2" Visibility="Hidden">
-
+            
+        </Grid>
+    
+        <!-- Home Template -->
+        <Grid Grid.ColumnSpan="3" Grid.RowSpan="3">
+            <ContentControl Content="{Binding ContentView}"/>
         </Grid>
     </Grid>
 
