@@ -10,61 +10,88 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="UrlListTemplate">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding UrlTitle}"/>
-                <TextBlock Text="{Binding UrlPartialContent}"/>
-                <TextBlock Text="{Binding UrlDate}"/>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <Button Background="Transparent" BorderBrush="Transparent" 
+                        Command="{Binding DataContext.ClickUrl, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding UrlTitle}"/>
+                        <TextBlock Text="{Binding UrlContent}"/>
+                        <TextBlock Text="{Binding UrlDate}"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </DataTemplate>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
-    
-    
+
+
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="22*"/>
-            <RowDefinition Height="427*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="175*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" Background="#903091">
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="#903091" Margin="0,0,0,0.4">
             <Button Width="20" Height="20" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center"
                      Command="{Binding CloseInternetView}">
                 <Image Source="C:/Users/tuuna/Desktop/Search/Image/close.png"/>
             </Button>
         </StackPanel>
-        
-        
-        <!--검색 브라우저-->
-        <Grid Grid.Column="0" Grid.Row="1" Visibility="{Binding OnBrowser}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100*"/>
-                <RowDefinition Height="400*"/>
-            </Grid.RowDefinitions>
-            <Border Grid.Column="0" Grid.Row="0" Background="Gray">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBox Text="{Binding SearchContent}" Width="400" Height="30" Background="LightGray"/>
-                    <Button Content="검색" Width="50" Height="30" Background="Transparent" BorderBrush="Transparent" 
-                            Foreground="White" FontWeight="Bold" FontSize="20"/>
-                </StackPanel>
-            </Border>
 
+        <Border Grid.Column="0" Grid.Row="1" Background="Gray" BorderThickness="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <TextBox Text="{Binding SearchContent, Mode=TwoWay}" Width="400" Height="30" Background="LightGray"/>
+                <Button Content="검색" Width="50" Height="30" Background="Transparent" BorderBrush="Transparent" 
+                            Foreground="White" FontWeight="Bold" FontSize="20"
+                            Command="{Binding Search}"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 검색 내용 템플렛 {Binding OnBrowser}-->
+        <Grid Grid.Column="0" Grid.Row="2" Visibility="{Binding OnBrowser,Converter={StaticResource BoolToVis}}">
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
                 <ListBox ItemTemplate="{StaticResource UrlListTemplate}"
-                         Selected="{Binding SelectedUrl}"
+                         SelectedItem="{Binding SelectedUrl}"
                          ItemsSource="{Binding UrlLists}">
-                    
+
                 </ListBox>
             </StackPanel>
         </Grid>
 
         <!-- 뉴스 템플릿-->
-        <Border Grid.Column="0" Grid.Row="1" Visibility="Hidden">
+        <Grid Grid.Column="0" Grid.Row="2" Visibility="{Binding OnNews,Converter={StaticResource BoolToVis}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="71*"/>
+                <RowDefinition Height="58*"/>
+                <RowDefinition Height="221*"/>
+            </Grid.RowDefinitions>
 
-        </Border>
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid>
+                    <Rectangle Width="500" Height="50" Fill="AliceBlue" Margin="10"/>
+                    <TextBlock Text="{Binding NewsCompany}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" FontWeight="Bold"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="1" Margin="0,5.8,0,220.6" Grid.RowSpan="2">
+                <TextBlock Text="{Binding NewsTitle}" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold"/>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="2" Margin="0,0.2,0,-0.4">
+                <Border Margin="10" Background="LightGray">
+                    <TextBlock Text="{Binding NewsContent}" HorizontalAlignment="Center" FontSize="20" Margin="5"/>
+                </Border>
+            </Grid>
+            <!-- 이미지 넣고 싶거나 아닐때는 어떻게 고를것인가-->
+        </Grid>
 
         <!-- 블로그 템플릿-->
-        <Border Grid.Column="0" Grid.Row="1" Visibility="Hidden">
+        <Grid Grid.Column="0" Grid.Row="2" Visibility="Hidden">
 
-        </Border>
+        </Grid>
     </Grid>
 
 </UserControl>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SearchGame.ViewModel;
 
 namespace SearchGame.Views
 {
@@ -23,6 +24,7 @@ namespace SearchGame.Views
         public InternetView()
         {
             InitializeComponent();
+            this.DataContext = new ViewModel.InternetViewModel();
         }
     }
 }
