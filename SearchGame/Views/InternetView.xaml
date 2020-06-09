@@ -38,7 +38,7 @@
             <RowDefinition Height="175*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" Background="#903091" Margin="0,0,0,0.4">
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="#681BAD" Margin="0,0,0,0.4">
             <Button Width="20" Height="20" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center"
                      Command="{Binding CloseInternet}">
                 <Image Source="C:/Users/tuuna/Desktop/Search/Image/close.png"/>
@@ -60,7 +60,7 @@
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
                 <ListBox ItemTemplate="{StaticResource UrlListTemplate}"
                          SelectedItem="{Binding SelectedUrl}"
-                         ItemsSource="{Binding UrlLists}">
+                         ItemsSource="{Binding UrlLists}" Background="Transparent" BorderBrush="Transparent" Margin="20">
 
                 </ListBox>
             </StackPanel>

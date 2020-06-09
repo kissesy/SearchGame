@@ -60,6 +60,8 @@ namespace SearchGame.Model
                 RaisePropertyChanged("QuestContent");
             }
         }
+
+        public int indentity;
     }
 
     public class QuestDetail : INotify

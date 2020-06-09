@@ -8,7 +8,62 @@
              xmlns:viewModel="Clr-namespace.SearchGame.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="SoicalUrlListTemplate">
+            <Border CornerRadius="7" Background="LightGray">
+                <StackPanel Orientation="Horizontal" Width="400" Background="Transparent">
+                    <Image Source="{Binding ProfileImage}" Width="70" Height="70"/>
+                    <Button Background="Transparent" BorderBrush="Transparent" 
+                        Command="{Binding DataContext.ClickUrl, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}">
+                        <TextBlock Text="{Binding ProfileName}" FontSize="20" Background="Transparent" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="78*"/>
+            <RowDefinition Height="355*"/>
+        </Grid.RowDefinitions>
+
+        
+        <Grid Grid.Row="0" Background="#681BAD">
+            <Button  Width="20" Height="20" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center"
+                     Command="{Binding CloseSocialView}">
+                <Image Source="C:/Users/tuuna/Desktop/Search/Image/close.png"/>
+            </Button>
+        </Grid>
+
+        <Border Grid.Column="0" Grid.Row="1" Background="#1F375F" BorderThickness="0">
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                    <TextBox Text="{Binding SearchContent, Mode=TwoWay}" Width="400" Height="30" Background="LightGray"/>
+                    <Button Content="검색" Width="50" Height="30" Background="Transparent" BorderBrush="Transparent" 
+                            Foreground="White" FontWeight="Bold" FontSize="20"
+                            Command="{Binding Search}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 검색 내용 템플렛 -->
+        <Grid Grid.Row="2" Background="#1F375F" Visibility="{Binding OnSearch}">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
+                <ListBox ItemTemplate="{StaticResource SoicalUrlListTemplate}"
+                         ItemsSource="{Binding SocialUrlLists}" 
+                         SelectedItem="{Binding SelectedUrl}"
+                         Background="Transparent" BorderBrush="Transparent" Margin="20">
+                    
+                </ListBox>
+            </StackPanel>
+        </Grid>
             
+        <!-- 검색 된 유저 트윗 내용-->
+        <Grid>
+            
+        </Grid>
     </Grid>
 </UserControl>

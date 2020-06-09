@@ -20,9 +20,10 @@ namespace SearchGame.ViewModel
         public InternetViewModel()
         {
             //ContentView = new ViewModel.InternetViewModel();
-            OnBrowser = true;
-            OnNews = false;
-            OnBlog = false;
+            OnView("OnBrowser");
+            //OnBrowser = true;
+            //OnNews = false;
+            //OnBlog = false;
         }
 
         private Object contentview;
@@ -69,6 +70,14 @@ namespace SearchGame.ViewModel
                 RaisePropertyChanged("OnBlog");
             }
         }
+
+
+        void OnView(string thing)
+        {
+            OnBrowser = (thing == "OnBrowser") ? true : false;
+            OnNews = (thing == "OnNews") ? true : false;
+            OnBlog = (thing == "OnBlog") ? true : false;
+        }
         #endregion
 
         #region CloseInternetView
@@ -99,10 +108,10 @@ namespace SearchGame.ViewModel
         void SearchExecute()
         {
             //현재 켜져있는 모든 창 hidden상태로 넣기 
-            OnNews = false;
-            OnBrowser = true;
-            OnBlog = false;
-
+            //OnNews = false;
+            //OnBrowser = true;
+            //OnBlog = false;
+            OnView("OnBrowser");
             LoadUrls();
         }
 
@@ -130,17 +139,19 @@ namespace SearchGame.ViewModel
         void ClickUrlExecute()
         {
             
-            OnBrowser = false; //클릭된 객체의 타입에 따라 어떤 것들을 false로 할지 결정
+            //OnBrowser = false; //클릭된 객체의 타입에 따라 어떤 것들을 false로 할지 결정
             if(SelectedUrl.Type == 1)
             {
-                OnBlog = false;
-                OnNews = true;
+                OnView("OnNews");
+                //OnBlog = false;
+                //OnNews = true;
                 LoadNews();
             }
             else if(SelectedUrl.Type == 2)
             {
-                OnBlog = true;
-                OnNews = false;
+                //OnBlog = true;
+                //OnNews = false;
+                OnView("OnBlog");
                 LoadBlog();
             }  
         }
