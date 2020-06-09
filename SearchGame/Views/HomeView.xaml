@@ -49,6 +49,10 @@
         <DataTemplate DataType="{x:Type viewModel:InternetViewModel}">
             <views:InternetView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:SocialViewModel}">
+            <views:SocialView/>
+        </DataTemplate>
         
     </UserControl.Resources>
 

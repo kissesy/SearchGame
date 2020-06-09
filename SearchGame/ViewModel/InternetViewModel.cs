@@ -22,6 +22,7 @@ namespace SearchGame.ViewModel
             //ContentView = new ViewModel.InternetViewModel();
             OnBrowser = true;
             OnNews = false;
+            OnBlog = false;
         }
 
         private Object contentview;
@@ -100,6 +101,7 @@ namespace SearchGame.ViewModel
             //현재 켜져있는 모든 창 hidden상태로 넣기 
             OnNews = false;
             OnBrowser = true;
+            OnBlog = false;
 
             LoadUrls();
         }
@@ -115,18 +117,37 @@ namespace SearchGame.ViewModel
         #endregion
 
         #region ClickURL
-        
+
+        private UrlList _Url;
+        public UrlList SelectedUrl
+        {
+            get { return _Url; }
+            set { _Url = value; RaisePropertyChanged("SelctedUrl"); }
+        }
+
+
         //해당 URL클릭시 type과 식별코드로 알맞은 뉴스템플렛 생성
         void ClickUrlExecute()
         {
+            
             OnBrowser = false; //클릭된 객체의 타입에 따라 어떤 것들을 false로 할지 결정
-            OnNews = true;
-            LoadNews();
+            if(SelectedUrl.Type == 1)
+            {
+                OnBlog = false;
+                OnNews = true;
+                LoadNews();
+            }
+            else if(SelectedUrl.Type == 2)
+            {
+                OnBlog = true;
+                OnNews = false;
+                LoadBlog();
+            }  
         }
 
         bool CanClickUrlExecute()
         {
-            return true;
+            return SelectedUrl != null;
         }
 
         public ICommand ClickUrl { get { return new RelayCommand(ClickUrlExecute, CanClickUrlExecute); } }
@@ -182,6 +203,60 @@ namespace SearchGame.ViewModel
 
 
         #region BlogTemplate
+
+        private BlogTemplate _Blog;
+        public BlogTemplate Blog
+        {
+            get { return _Blog; }
+            set
+            {
+                _Blog = value;
+                RaisePropertyChanged("BlogProfileImage");
+                RaisePropertyChanged("BlogProfileName");
+                RaisePropertyChanged("BlogTitle");
+                RaisePropertyChanged("BlogDate");
+                RaisePropertyChanged("BlogContent");
+            }
+        }
+
+        public string BlogProfileImage
+        {
+            get { return Blog.BlogProfileImage; }
+            set { Blog.BlogProfileImage = value; }
+        }
+        public string BlogProfileName
+        {
+            get { return Blog.BlogProfileName; }
+            set { Blog.BlogProfileName = value; }
+        }
+        public string BlogTitle
+        {
+            get { return Blog.BlogTitle; }
+            set { Blog.BlogTitle = value; }
+        }
+        public string BlogDate
+        {
+            get { return Blog.BlogDate; }
+            set { Blog.BlogDate = value; }
+        }
+        public string BlogContent
+        {
+            get { return Blog.BlogContent; }
+            set { Blog.BlogContent = value; }
+        }
+
+        //추후에 인자로 선태한 SelectedUrl 객체받기
+        void LoadBlog()
+        {
+            //Identity에 따라 ~~ 
+            BlogTemplate Blogs = new BlogTemplate();
+            Blogs.BlogProfileImage = "C:/Users/tuuna/Desktop/Search/Image/person.png";
+            Blogs.BlogProfileName = "김아무개";
+            Blogs.BlogTitle = "승우형이 해주기를 기대중";
+            Blogs.BlogDate = "2019-12-28";
+            Blogs.BlogContent = "볼리베어 양학중 사실로 밝혀졌습니다.";
+            Blog = Blogs;
+        }
 
         #endregion
 

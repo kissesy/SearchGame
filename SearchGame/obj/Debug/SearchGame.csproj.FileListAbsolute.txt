@@ -34,3 +34,5 @@ C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\SearchGame.Properties.Res
 C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\SearchGame.csproj.GenerateResource.cache
 C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\SearchGame.exe
 C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\SearchGame.pdb
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\Views\SocialView.g.cs
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\Views\SocialView.baml

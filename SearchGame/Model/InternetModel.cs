@@ -34,9 +34,46 @@ namespace SearchGame.Model
             get { return newscontent; }
             set { newscontent = value; }
         }
-
-
     }
+
+    public class BlogTemplate
+    {
+        private string _BlogProfileImage;
+        private string _BlogProfileName;
+
+        private string _BlogTitle;
+        private string _BlogDate;
+        private string _BlogContent;
+
+        public string BlogProfileImage
+        {
+            get { return _BlogProfileImage; }
+            set { _BlogProfileImage = value; }
+        }
+        public string BlogProfileName
+        {
+            get { return _BlogProfileName; }
+            set { _BlogProfileName = value; }
+        }
+        public string BlogTitle
+        {
+            get { return _BlogTitle; }
+            set { _BlogTitle = value; }
+        }
+        public string BlogDate
+        {
+            get { return _BlogDate; }
+            set { _BlogDate = value; }
+        }
+        public string BlogContent
+        {
+            get { return _BlogContent; }
+            set { _BlogContent = value; }
+        }
+
+        public int identity;
+    }
+
 
 
     public class UrlList

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\tuuna\source\repos\SearchGame\SearchGame\obj\Debug\
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\
 SearchGame
 none
 false
 DEBUG;TRACE
-C:\Users\tuuna\source\repos\SearchGame\SearchGame\App.xaml
-3-2003004755
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\App.xaml
+4-80018694
 
-14421947747
+17-992414092
 14-1493268296
-MainWindow.xaml;Views\HomeView.xaml;Views\InternetView.xaml;
+MainWindow.xaml;Views\HomeView.xaml;Views\InternetView.xaml;Views\SocialView.xaml;
 
-True
+False
 

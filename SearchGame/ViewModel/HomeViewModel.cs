@@ -59,6 +59,11 @@ namespace SearchGame.ViewModel
             {
 
             }
+
+            else if(SelectedIcon.Type == 4)
+            {
+                ContentView = new ViewModel.SocialViewModel();
+            }
             
         }
         bool CanOpenIconExecute()
@@ -162,8 +167,9 @@ namespace SearchGame.ViewModel
             ObservableCollection<DesktopIconList> deskiconlist = new ObservableCollection<DesktopIconList>
             {
                 new DesktopIconList { ImageName = "Internet", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/internet.png", Type=1 },
-                new DesktopIconList { ImageName = "market", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/market.png", Type=2 },
-                new DesktopIconList { ImageName = "notepad", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/notepad.png", Type=3 }
+                new DesktopIconList { ImageName = "Market", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/market.png", Type=2 },
+                new DesktopIconList { ImageName = "Notepad", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/notepad.png", Type=3 },
+                new DesktopIconList { ImageName = "Twitter", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/twitter.png", Type=4 }
             };
             DesktopIconLists = deskiconlist;
         }

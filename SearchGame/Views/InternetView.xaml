@@ -37,8 +37,7 @@
             <RowDefinition Height="39*"/>
             <RowDefinition Height="175*"/>
         </Grid.RowDefinitions>
-        
-        
+
         <StackPanel Grid.Column="0" Grid.Row="0" Background="#903091" Margin="0,0,0,0.4">
             <Button Width="20" Height="20" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center"
                      Command="{Binding CloseInternet}">
@@ -67,7 +66,7 @@
             </StackPanel>
         </Grid>
 
-        <!-- 뉴스 템플릿-->
+        <!-- 뉴스 템플릿 {Binding OnNews,Converter={StaticResource BoolToVis}}-->
         <Grid Grid.Column="0" Grid.Row="2" Visibility="{Binding OnNews,Converter={StaticResource BoolToVis}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="71*"/>
@@ -95,8 +94,46 @@
         </Grid>
 
         <!-- 블로그 템플릿-->
-        <Grid Grid.Column="0" Grid.Row="2" Visibility="Hidden">
-            
+        <Grid Grid.Column="0" Grid.Row="2" Visibility="{Binding OnBlog,Converter={StaticResource BoolToVis}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="400*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--블로그 프로필, 개인정보란-->
+            <Border BorderBrush="AntiqueWhite" BorderThickness="10">
+                <Grid Grid.Column="0" Grid.Row="0" Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150*"/>
+                        <RowDefinition Height="150*"/>
+                    </Grid.RowDefinitions>
+                    <!--블로그 프로픨-->
+                    <Grid Grid.Row="0" Grid.Column="0" Background="LightGray">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200*"/>
+                            <RowDefinition Height="100*"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Rectangle Grid.Column="0" Grid.Row="0" Fill="AliceBlue"/>
+                            <Image Source="{Binding BlogProfileImage}"/>
+                        </Grid>
+                        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
+                            <TextBlock Text="{Binding BlogProfileName}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1" Grid.Row="0" Background="FloralWhite">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="200*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{Binding BlogTitle}" FontSize="40" FontWeight="Bold"/>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{Binding BlogDate}" FontSize="15"/>
+                <TextBlock Grid.Row="2" HorizontalAlignment="Center" Text="{Binding BlogContent}" FontSize="20"/>
+
+            </Grid>
         </Grid>
     
         <!-- Home Template -->
