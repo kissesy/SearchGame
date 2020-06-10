@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="SoicalUrlListTemplate">
-            <Border CornerRadius="7" Background="LightGray">
+            <Border CornerRadius="7" Background="LightGray" Margin="10">
                 <StackPanel Orientation="Horizontal" Width="400" Background="Transparent">
                     <Image Source="{Binding ProfileImage}" Width="70" Height="70"/>
                     <Button Background="Transparent" BorderBrush="Transparent" 
@@ -21,8 +21,24 @@
                 </StackPanel>
             </Border>
         </DataTemplate>
+
+        <DataTemplate x:Key="UserTwitTemplate">
+            <Border Background="Transparent" Width="500" Height="70">
+                <StackPanel Orientation="Vertical">
+                    <Border CornerRadius="5" Background="LightGray" Margin="5">
+                        <TextBlock Text="{Binding TwitDate}"/>
+                    </Border>
+                    <Border CornerRadius="1" Background="#9398B9" Margin="5">
+                        <TextBlock Text="{Binding TwitContent}" FontSize="20" FontWeight="Bold"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
-    <Grid>
+    
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="17*"/>
             <RowDefinition Height="78*"/>
@@ -50,7 +66,7 @@
         </Border>
 
         <!-- 검색 내용 템플렛 -->
-        <Grid Grid.Row="2" Background="#1F375F" Visibility="{Binding OnSearch}">
+        <Grid Grid.Row="2" Background="#1F375F" Visibility="{Binding OnSearch, Converter={StaticResource BoolToVis}}">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
                 <ListBox ItemTemplate="{StaticResource SoicalUrlListTemplate}"
                          ItemsSource="{Binding SocialUrlLists}" 
@@ -62,8 +78,33 @@
         </Grid>
             
         <!-- 검색 된 유저 트윗 내용-->
-        <Grid>
-            
+        <Grid Grid.Row="2" Background="#1F375F" Visibility="{Binding OnUser, Converter={StaticResource BoolToVis}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="40*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal">
+                    <Border CornerRadius="20" Background="White" Margin="20, 0, 0, 0">
+                        <Image Source="{Binding UserImage}"/>
+                    </Border>
+                    <Border CornerRadius="20" Background="LightGray" Margin="20,0,0,0">
+                        <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <ListBox ItemTemplate="{StaticResource UserTwitTemplate}"
+                             ItemsSource="{Binding UserTwitLists}"
+                             SelectedItem="{Binding SelectedTwit}"
+                             Background="Transparent" BorderBrush="Transparent" Margin="20">
+                        
+                    </ListBox>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

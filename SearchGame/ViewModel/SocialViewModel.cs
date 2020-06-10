@@ -17,10 +17,12 @@ namespace SearchGame.ViewModel
     {
 
 
+        #region Constructor
         public SocialViewModel()
         {
-
+            OnSwitch("OnSearch");
         }
+        #endregion
 
         #region Search
 
@@ -43,9 +45,9 @@ namespace SearchGame.ViewModel
         {
             ObservableCollection<SocialUrlList> UrlList = new ObservableCollection<SocialUrlList>
             {
-                new SocialUrlList { ProfileImage = "C:/Users/tuuna/Desktop/Search/Image/person.png", ProfileName = "김아무개" },
-                new SocialUrlList { ProfileImage = "C:/Users/tuuna/Desktop/Search/Image/person.png", ProfileName = "김무슨갓" },
-                new SocialUrlList { ProfileImage = "C:/Users/tuuna/Desktop/Search/Image/person.png", ProfileName = "이세현" }
+                new SocialUrlList { ProfileImage = "C:/Users/tuuna/Desktop/Search/Image/person.png", ProfileName = "김아무개(@youngMan3221)", indentity=1},
+                new SocialUrlList { ProfileImage = "C:/Users/tuuna/Desktop/Search/Image/person.png", ProfileName = "김무슨갓(@tuunakd)", indentity=2 },
+                new SocialUrlList { ProfileImage = "C:/Users/tuuna/Desktop/Search/Image/person.png", ProfileName = "이세현(@goodia123)", indentity=3 }
             };
 
             SocialUrlLists = UrlList;
@@ -66,10 +68,72 @@ namespace SearchGame.ViewModel
         #endregion
 
         #region On/Off
+
+        private bool _OnSearch;
+        public bool OnSearch
+        {
+            get { return _OnSearch; }
+            set { _OnSearch = value; RaisePropertyChanged("OnSearch"); }
+        }
+
+        private bool _OnUser;
+        public bool OnUser
+        {
+            get { return _OnUser; }
+            set { _OnUser = value; RaisePropertyChanged("OnUser"); }
+        }
+
         void OnSwitch(string thing)
         {
-
+            OnSearch = ("OnSearch" == thing) ? true : false;
+            OnUser = ("OnUser" == thing) ? true : false;
         }
+        #endregion
+
+        #region LoadUserTwit
+
+
+        string _UserImage;
+        public string UserImage
+        { 
+            get { return _UserImage; }
+            set { _UserImage = value; RaisePropertyChanged("UserImage"); }
+        }
+
+
+        string _UserName;
+        public string UserName
+        {
+            get { return _UserName; }
+            set { _UserName = value; RaisePropertyChanged("UserName"); }
+        }
+
+        ObservableCollection<UserTwitList> _UserTwit = new ObservableCollection<UserTwitList>();
+        public ObservableCollection<UserTwitList> UserTwitLists
+        {
+            get { return _UserTwit; }
+            set { _UserTwit = value; RaisePropertyChanged("UserTwitLists"); }
+        }
+
+        public string TwitDate;
+        public string TwitContent;
+
+        void LoadUserTwit()
+        {
+            //특정 identity인것만 가지고옴 
+            OnSwitch("OnUser");
+            UserName = SelectedUrl.ProfileName;
+            UserImage = SelectedUrl.ProfileImage;
+
+            ObservableCollection<UserTwitList> Twits = new ObservableCollection<UserTwitList>
+            {
+                new UserTwitList { TwitDate = "2020-12.21", TwitContent = "밥 잘묵음" },
+                new UserTwitList { TwitDate = "2020-12.22", TwitContent = "밥 잘 안묵음" },
+                new UserTwitList { TwitDate = "2020-12.24", TwitContent = "밥 많이묵음" }
+            };
+            UserTwitLists = Twits;
+        }
+
         #endregion
 
         #region ClickUrl
@@ -83,7 +147,9 @@ namespace SearchGame.ViewModel
 
         void ClickUrlExecute()
         {
-
+            //identity 체크 
+            
+            LoadUserTwit();
         }
 
         bool CanClickUrlExecute()
