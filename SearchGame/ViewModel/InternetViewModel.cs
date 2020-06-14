@@ -21,9 +21,6 @@ namespace SearchGame.ViewModel
         {
             //ContentView = new ViewModel.InternetViewModel();
             OnView("OnBrowser");
-            //OnBrowser = true;
-            //OnNews = false;
-            //OnBlog = false;
         }
 
         private Object contentview;

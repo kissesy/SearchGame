@@ -36,3 +36,12 @@ C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\SearchGame.exe
 C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\SearchGame.pdb
 C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\Views\SocialView.g.cs
 C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\Views\SocialView.baml
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\Views\MailView.g.cs
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\Views\MailView.baml
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\bin\Debug\MaterialDesignColors.dll
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\bin\Debug\MaterialDesignColors.pdb
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\SearchGame.csproj.CopyComplete
+C:\Users\tuuna\Desktop\SearchGame\SearchGame\obj\Debug\Dictionary1.baml

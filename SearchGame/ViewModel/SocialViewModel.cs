@@ -30,7 +30,7 @@ namespace SearchGame.ViewModel
         public string SearchContent
         {
             get { return _SearchContent; }
-            set { SearchContent = value; RaisePropertyChanged("SearchContent"); }
+            set { _SearchContent = value; RaisePropertyChanged("SearchContent"); }
         }
 
         private ObservableCollection<SocialUrlList> Urls = new ObservableCollection<SocialUrlList>();
@@ -43,6 +43,7 @@ namespace SearchGame.ViewModel
 
         void LoadUrl()
         {
+            //OnSwitch("OnSearh");
             ObservableCollection<SocialUrlList> UrlList = new ObservableCollection<SocialUrlList>
             {
                 new SocialUrlList { ProfileImage = "C:/Users/tuuna/Desktop/Search/Image/person.png", ProfileName = "김아무개(@youngMan3221)", indentity=1},
@@ -55,6 +56,7 @@ namespace SearchGame.ViewModel
 
         void SearchExecute()
         {
+            OnSwitch("OnSearch");
             LoadUrl();
         }
 
@@ -86,6 +88,7 @@ namespace SearchGame.ViewModel
         void OnSwitch(string thing)
         {
             OnSearch = ("OnSearch" == thing) ? true : false;
+            Console.WriteLine(OnSearch.ToString());
             OnUser = ("OnUser" == thing) ? true : false;
         }
         #endregion
@@ -148,19 +151,46 @@ namespace SearchGame.ViewModel
         void ClickUrlExecute()
         {
             //identity 체크 
-            
+            if (SelectedUrl == null) return;
             LoadUserTwit();
         }
 
         bool CanClickUrlExecute()
         {
-            //return true;
-            return SelectedUrl != null;
+            return true;
+            //return SelectedUrl != null;
         }
 
         public ICommand ClickUrl { get { return new RelayCommand(ClickUrlExecute, CanClickUrlExecute); } }
         #endregion
 
+        #region CloseSocialView
+
+        private Object contentview;
+        public Object ContentView
+        {
+            get { return contentview; }
+            set
+            {
+                contentview = value;
+                RaisePropertyChanged("ContentView");
+            }
+        }
+
+        void CloseViewExecute()
+        {
+            ContentView = new HomeViewModel();
+        }
+
+        bool CanCloseViewExecute()
+        {
+            return true;
+        }
+
+        public ICommand CloseSocialView { get { return new RelayCommand(CloseViewExecute, CanCloseViewExecute); } }
+
+        #endregion
+        
         #region MessageBox
         //MessageBox Interface 
         bool ShowMessage(string text, string caption, MessageType messageType)

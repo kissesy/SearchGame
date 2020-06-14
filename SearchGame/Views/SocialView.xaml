@@ -4,21 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SearchGame.Views"
-             xmlns:views="clr-namespace.SearchGame.Views"
-             xmlns:viewModel="Clr-namespace.SearchGame.ViewModel"
+             xmlns:views="clr-namespace:SearchGame.Views"
+             xmlns:viewModel="clr-namespace:SearchGame.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
         <DataTemplate x:Key="SoicalUrlListTemplate">
             <Border CornerRadius="7" Background="LightGray" Margin="10">
-                <StackPanel Orientation="Horizontal" Width="400" Background="Transparent">
-                    <Image Source="{Binding ProfileImage}" Width="70" Height="70"/>
-                    <Button Background="Transparent" BorderBrush="Transparent" 
+                <Button Background="Transparent" BorderBrush="Transparent" 
                         Command="{Binding DataContext.ClickUrl, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}">
-                        <TextBlock Text="{Binding ProfileName}" FontSize="20" Background="Transparent" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    </Button>
-                </StackPanel>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="CadetBlue"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding ProfileImage}" Width="70" Height="70"/>
+                        <TextBlock Text="{Binding ProfileName}" FontSize="20" Background="Transparent" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
             </Border>
         </DataTemplate>
 
@@ -33,6 +42,10 @@
                     </Border>
                 </StackPanel>
             </Border>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <views:HomeView/>
         </DataTemplate>
 
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -67,11 +80,13 @@
 
         <!-- 검색 내용 템플렛 -->
         <Grid Grid.Row="2" Background="#1F375F" Visibility="{Binding OnSearch, Converter={StaticResource BoolToVis}}">
+            
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
+                
                 <ListBox ItemTemplate="{StaticResource SoicalUrlListTemplate}"
                          ItemsSource="{Binding SocialUrlLists}" 
                          SelectedItem="{Binding SelectedUrl}"
-                         Background="Transparent" BorderBrush="Transparent" Margin="20">
+                         Background="Transparent" BorderBrush="Transparent" Margin="20" HorizontalContentAlignment="Stretch">
                     
                 </ListBox>
             </StackPanel>
@@ -100,11 +115,15 @@
                     <ListBox ItemTemplate="{StaticResource UserTwitTemplate}"
                              ItemsSource="{Binding UserTwitLists}"
                              SelectedItem="{Binding SelectedTwit}"
-                             Background="Transparent" BorderBrush="Transparent" Margin="20">
+                             Background="Transparent" BorderBrush="Transparent" Margin="20" >
                         
                     </ListBox>
                 </StackPanel>
             </Grid>
+        </Grid>
+        <!-- Home Template -->
+        <Grid Grid.ColumnSpan="3" Grid.RowSpan="3">
+            <ContentControl Content="{Binding ContentView}"/>
         </Grid>
     </Grid>
 </UserControl>

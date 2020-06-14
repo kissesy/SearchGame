@@ -45,24 +45,23 @@ namespace SearchGame.ViewModel
 
         void OpenIconExecute()
         {
-            //어떤 아이콘을 눌렀는지에 대한 정보 필요 
-            if(SelectedIcon.Type == 1)
+            switch(SelectedIcon.Type)
             {
-                //InterNetBrowser
-                ContentView = new ViewModel.InternetViewModel();
-            }
-            else if(SelectedIcon.Type == 2)
-            {
-
-            }
-            else if(SelectedIcon.Type == 3)
-            {
-
-            }
-
-            else if(SelectedIcon.Type == 4)
-            {
-                ContentView = new ViewModel.SocialViewModel();
+                case 1:
+                    ContentView = new ViewModel.InternetViewModel();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    ContentView = new ViewModel.SocialViewModel();
+                    break;
+                case 5:
+                    ContentView = new ViewModel.MailViewModel();
+                    break;
+                default:
+                    break;
             }
             
         }
@@ -169,7 +168,8 @@ namespace SearchGame.ViewModel
                 new DesktopIconList { ImageName = "Internet", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/internet.png", Type=1 },
                 new DesktopIconList { ImageName = "Market", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/market.png", Type=2 },
                 new DesktopIconList { ImageName = "Notepad", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/notepad.png", Type=3 },
-                new DesktopIconList { ImageName = "Twitter", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/twitter.png", Type=4 }
+                new DesktopIconList { ImageName = "Twitter", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/twitter.png", Type=4 },
+                new DesktopIconList { ImageName = "Mail", ImageSource = "C:/Users/tuuna/Desktop/Search/Image/mail.png", Type=5 }
             };
             DesktopIconLists = deskiconlist;
         }
